@@ -2,9 +2,12 @@
 preprocessed_images/
 colored_images/
 models/
+models.zip
 node_modules/
 .venv/
 __pycache__/
+docs/
+Weekly_Planner_Software_Despro2_Final.md
 .env
 .env.*
 !.env.example

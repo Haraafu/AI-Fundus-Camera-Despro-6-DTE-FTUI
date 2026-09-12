@@ -1,3 +1,3 @@
 # Frontend
 
-Placeholder untuk dashboard Next.js pekan 6. Kontrak backend: `docs/api.md`.
+Placeholder for the Week 6 Next.js dashboard. Backend contract: `docs/api.md`.
