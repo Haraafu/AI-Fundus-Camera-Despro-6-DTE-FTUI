@@ -6,7 +6,8 @@ models.zip
 node_modules/
 .venv/
 __pycache__/
-docs/
+docs/*
+!docs/api.md
 Weekly_Planner_Software_Despro2_Final.md
 .env
 .env.*
