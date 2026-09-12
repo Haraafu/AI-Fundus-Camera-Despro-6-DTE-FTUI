@@ -2,3 +2,12 @@
 preprocessed_images/
 colored_images/
 models/
+node_modules/
+.venv/
+__pycache__/
+.env
+.env.*
+!.env.example
+data/
+*.sqlite*
+*.log

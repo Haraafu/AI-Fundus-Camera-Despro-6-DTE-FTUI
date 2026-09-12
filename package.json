@@ -1,0 +1,20 @@
+{
+  "name": "ai-fundus-camera",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "backend": "node apps/backend/src/server.js",
+    "test": "node --test --test-concurrency=1 apps/backend/test/*.test.js",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "sharp": "^0.35.4"
+  }
+}

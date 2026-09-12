@@ -2,7 +2,52 @@
 
 An open research prototype for fundus-image processing and AI-assisted retinal screening. The wider Capstone Project aims to connect an affordable fundus-camera prototype with an extensible software workflow for image acquisition, preprocessing, analysis, visualisation, and reporting.
 
-This repository currently contains the diabetic retinopathy (DR) machine-learning pipeline. It is intended for academic and research use only and is **not** a certified medical device or a substitute for examination and diagnosis by a qualified clinician.
+This repository contains the diabetic retinopathy (DR) machine-learning pipeline and the Week 3 local backend with a separate Python mock AI service. It is intended for academic and research use only and is **not** a certified medical device or a substitute for examination and diagnosis by a qualified clinician.
+
+## Pekan 3: Backend dan Mock AI
+
+Mengikuti jadwal terbaru di Weekly Planner: client → upload → Express → Python mock AI → examination JSON. Mock selalu mengembalikan Moderate/0.81, `isMock: true`, `modelVersion: mock-v0`; ini dummy untuk pengujian komunikasi, bukan inferensi. Preprocessing/training lama tetap tersedia untuk pekerjaan model pekan 4.
+
+Struktur baru: `apps/backend/src/` (Express, client AI, SQLite), `apps/frontend/` (placeholder), `services/ai-service/` (FastAPI), `scripts/smoke.mjs` (client uji), `docs/api.md` (kontrak dan schema).
+
+Prasyarat: Node.js >=22.13 (SQLite bawaan; diuji Node 24.18), Python >=3.10 (diuji 3.11.9). Jalankan semua perintah berikut dari root repository:
+
+```powershell
+npm ci
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r services/ai-service/requirements.txt
+Copy-Item .env.example .env
+```
+
+Terminal pertama:
+
+```powershell
+.\.venv\Scripts\python.exe services/ai-service/app.py
+```
+
+Terminal kedua:
+
+```powershell
+npm run backend
+```
+
+Service default: backend `http://127.0.0.1:3001`, AI `http://127.0.0.1:8000`, keduanya memiliki `/health`. Dokumentasi interaktif AI: `http://127.0.0.1:8000/docs`. SQLite dibuat otomatis di `data/fundus.sqlite`, original image di `data/uploads/`. File `.env`, database, dan upload diabaikan Git. Jalankan satu backend per database. Konfigurasi relatif terhadap root/current directory.
+
+Terminal ketiga, pilih citra dataset lokal:
+
+```powershell
+npm run smoke -- "colored_images/Moderate/000c1434d8d7.png"
+```
+
+Ganti path sesuai file yang tersedia. Script membuat pemeriksaan demo, upload citra, lalu membaca hasil tersimpan. Gunakan kode pasien anonim. Respons mock ditandai secara eksplisit. Untuk retake buat examination baru.
+
+Pengujian otomatis (menyalakan/mematikan Python sendiri, port acak, SQLite sementara):
+
+```powershell
+npm test
+```
+
+Linux/macOS: gunakan `.venv/bin/python` dan jalankan `PYTHON=.venv/bin/python npm test`. Dependency TensorFlow tidak diperlukan untuk mock service. Kontrak lengkap, status, error, dan schema: [docs/api.md](docs/api.md). Bukti pengujian: [docs/week-3-report.md](docs/week-3-report.md).
 
 ## Current Capability
 
